@@ -26,7 +26,7 @@ wheels = [
 [[package]]
 name = "markdown2pdf"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "pandoc" },
     { name = "pandocfilters" },

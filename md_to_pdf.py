@@ -1,15 +1,34 @@
 import subprocess
+import argparse
 import sys
+from pathlib import Path
 
 
-def main():
-    if len(sys.argv) < 3:
-        print("Usage: python md_to_pdf.py input.md output.pdf")
-        sys.exit(1)
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        prog="markdown2pdf",
+        description="Convert a Markdown file to a PDF using Pandoc.",
+    )
+    parser.add_argument(
+        "input_md", help="Path to the input Markdown file (e.g., README.md)", type=Path
+    )
+    parser.add_argument(
+        "output_pdf", help="Path to the output PDF file (e.g., output.pdf)", type=Path
+    )
+    parser.add_argument(
+        "--margin", default="1in", help="Set page margin (default: 1in)"
+    )
+    parser.add_argument(
+        "--fontsize", default="11pt", help="Set base font size (default: 11pt)"
+    )
+    parser.add_argument(
+        "--engine", default="xelatex", help="Specify PDF engine (default: xelatex)"
+    )
 
-    input_md = sys.argv[1]
-    output_pdf = sys.argv[2]
+    return parser.parse_args()
 
+
+def run(input_md: Path, output_pdf: Path):
     cmd = [
         "pandoc",
         input_md,
@@ -26,14 +45,23 @@ def main():
 
     print("Generating PDF...")
     result = subprocess.run(cmd, capture_output=True, text=True)
-    print(result.stdout)
-    print(result.stderr)
+
+    if result.stdout != "":
+        print(result.stdout)
+
+    if result.stderr != "":
+        print(result.stderr)
 
     if result.returncode != 0:
         print(f"Pandoc failed with exit code {result.returncode}")
         sys.exit(result.returncode)
 
     print(f"PDF generated: {output_pdf}")
+
+
+def main():
+    parsed_args = parse_args()
+    run(parsed_args.input_md, parsed_args.output_pdf)
 
 
 if __name__ == "__main__":
