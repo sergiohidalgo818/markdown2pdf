@@ -8,4 +8,5 @@ sudo apt install -y \
   texlive-fonts-recommended \
   texlive-plain-generic \
   texlive-latex-recommended \
-  texlive-latex-extra
+  texlive-latex-extra \
+  weasyprint

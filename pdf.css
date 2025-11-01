@@ -1,0 +1,29 @@
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Make code blocks look cleaner */
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75em 1em;
+  overflow-x: auto;
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin: 1em 0;
+}
+
+/* Inline code */
+code {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  padding: 0.15em 0.3em;
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 0.9em;
+}
+

@@ -1,3 +1,4 @@
+import os
 import subprocess
 import argparse
 import sys
@@ -29,12 +30,18 @@ def parse_args() -> argparse.Namespace:
 
 
 def run(input_md: Path, output_pdf: Path):
+    tmp_file = str(input_md) + ".tmp"
+
+    input_md = input_md.resolve()
+    output_pdf = output_pdf.resolve()
+    css_file_path = os.getcwd() + "/pdf.css"
     cmd = [
         "pandoc",
         input_md,
-        "--from",
-        "markdown",
-        "--pdf-engine=xelatex",
+        "--from=gfm+raw_html+tex_math_dollars",
+        "--pdf-engine=weasyprint",
+        f"--metadata=base_url=file://{input_md.parent.resolve()}/",
+        f"--css={css_file_path}",
         "-V",
         "geometry:margin=1in",
         "-V",
@@ -42,9 +49,10 @@ def run(input_md: Path, output_pdf: Path):
         "-o",
         output_pdf,
     ]
-
     print("Generating PDF...")
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, cwd=input_md.parent)
+    if os.path.exists(tmp_file):
+        os.remove(tmp_file)
 
     if result.stdout != "":
         print(result.stdout)
