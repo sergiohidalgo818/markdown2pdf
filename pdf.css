@@ -1,29 +1,123 @@
+/* ===== GLOBAL TYPOGRAPHY ===== */
+html {
+  font-family: "Libre Baskerville", "Georgia", serif;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: #111;
+}
+
+p {
+  margin: 0.6em 0 0.9em 0;
+  text-align: justify;
+}
+
+/* ===== HEADINGS ===== */
+h1, h2, h3, h4 {
+  font-family: "Libre Baskerville", "Georgia", serif;
+  font-weight: bold;
+  color: #111;
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
+}
+
+h1 {
+  font-size: 1.6em;
+  border-bottom: 2px solid #000;
+  padding-bottom: 0.2em;
+}
+
+h2 {
+  font-size: 1.3em;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.1em;
+}
+
+h3 {
+  font-size: 1.1em;
+  font-style: italic;
+}
+
+/* ===== IMAGES ===== */
 img {
   display: block;
   max-width: 100%;
   height: auto;
-  margin: 0 auto;
+  margin: 0.5em auto;
 }
 
-/* Make code blocks look cleaner */
+/* Captions below figures or images */
+figcaption, .figure caption, td > p:last-child {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9em;
+  margin-top: 0.3em;
+  color: #333;
+}
+
+/* ===== TABLES (used for image layouts) ===== */
+table {
+  border-collapse: separate;
+  border-spacing: 0.6em 0;
+  margin: 1.2em auto;
+  width: 100%;
+  border: none;
+  table-layout: fixed; /* ensures consistent column widths */
+}
+/* Make sure images fill each cell neatly */
+table img {
+  display: block;
+  margin: 0.2em auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.15em;
+  background-color: #fafafa;
+  width: 98%; /* fills cell nicely, leaving a tiny margin */
+  height: auto;
+  box-sizing: border-box;
+}
+td, th {
+  border: none;
+  vertical-align: top;
+  text-align: center;
+  padding: 0.2em;
+  width: 52%; /* equal columns that fit exactly in 100% */
+}
+/* Captions under each figure */
+figcaption, .figure caption, td > p:last-child {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9em;
+  margin-top: 0.3em;
+  color: #333;
+}
+
+/* ===== CODE BLOCKS ===== */
 pre {
   background-color: #f5f5f5;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 6px;
   padding: 0.75em 1em;
   overflow-x: auto;
   font-family: "Fira Code", "Courier New", monospace;
-  font-size: 0.9em;
+  font-size: 0.85em;
   line-height: 1.4;
-  margin: 1em 0;
+  margin: 1.2em 0;
 }
 
-/* Inline code */
 code {
   background-color: #f0f0f0;
   border-radius: 4px;
   padding: 0.15em 0.3em;
   font-family: "Fira Code", "Courier New", monospace;
   font-size: 0.9em;
+}
+
+/* ===== LINKS ===== */
+a {
+  color: #0645ad;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
