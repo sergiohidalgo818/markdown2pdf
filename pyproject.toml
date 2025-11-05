@@ -5,7 +5,6 @@ description = "Program for converting markdown to pdf"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "pandoc>=2.4",
     "pyppeteer>=2.0.0",
 ]
 
