@@ -34,14 +34,14 @@ def run(input_md: Path, output_pdf: Path):
 
     input_md = input_md.resolve()
     output_pdf = output_pdf.resolve()
-    css_file_path = os.getcwd() + "/pdf.css"
+    css_file_path = Path(os.getcwd()) / "pdf.css"
     cmd = [
         "pandoc",
         input_md,
         "--from=gfm+raw_html+tex_math_dollars",
         "--pdf-engine=weasyprint",
         f"--metadata=base_url=file://{input_md.parent.resolve()}/",
-        f"--css={css_file_path}",
+        f"--css={css_file_path.resolve()}",
         "-V",
         "geometry:margin=1in",
         "-V",
