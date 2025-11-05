@@ -1,4 +1,4 @@
-# Markdown 2 PDF script
+# Markdown 2 PDF
 
 Program for converting markdown to pdf.
 
