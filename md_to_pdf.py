@@ -27,7 +27,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-async def html_to_pdf(input_html, output_pdf):
+async def html_to_pdf(input_html: Path, output_pdf: Path, css_file_path: Path):
     browser = await launch(headless=True, args=["--no-sandbox"])
     page = await browser.newPage()
 
@@ -37,9 +37,18 @@ async def html_to_pdf(input_html, output_pdf):
         await page.evaluate("MathJax.typesetPromise && MathJax.typesetPromise()")
     except Exception:
         pass
+    # await page.addStyleTag({"path": str(css_file_path.resolve())})
+    with open(css_file_path, "r", encoding="utf-8") as f:
+        css_content = f.read()
 
-    await page.pdf({"path": output_pdf, "format": "A4", "printBackground": True})
-
+    await page.addStyleTag({"content": css_content})
+    await page.pdf(
+        {
+            "path": output_pdf,
+            "format": "A4",
+            "printBackground": True,
+        }
+    )
     await browser.close()
 
 
@@ -72,6 +81,7 @@ def run(input_md: Path, output_pdf: Path):
         html_to_pdf(
             tmp_file_path.resolve(),
             output_pdf,
+            css_file_path,
         )
     )
 

@@ -1,4 +1,20 @@
 /* ===== GLOBAL TYPOGRAPHY ===== */
+@page {
+  size: A4;
+  margin: 25mm 20mm 25mm 20mm;
+}
+
+body {
+  background: white;
+  padding: 10mm;
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  page-break-after: avoid;
+}
+.page-break { page-break-before: always; }
+
 html {
   font-family: "Libre Baskerville", "Georgia", serif;
   font-size: 11pt;
