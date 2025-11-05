@@ -12,5 +12,5 @@ uv sync
 ## Usage
 
 ```bash
-uv run md_to_pdf.py input.md output.pdf
+uv run md_to_pdf.py input.md -o output.pdf
 ```

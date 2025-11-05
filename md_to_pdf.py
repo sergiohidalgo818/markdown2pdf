@@ -17,16 +17,11 @@ def parse_args() -> argparse.Namespace:
         "input_md", help="Path to the input Markdown file (e.g., README.md)", type=Path
     )
     parser.add_argument(
-        "output_pdf", help="Path to the output PDF file (e.g., output.pdf)", type=Path
-    )
-    parser.add_argument(
-        "--margin", default="1in", help="Set page margin (default: 1in)"
-    )
-    parser.add_argument(
-        "--fontsize", default="11pt", help="Set base font size (default: 11pt)"
-    )
-    parser.add_argument(
-        "--engine", default="xelatex", help="Specify PDF engine (default: xelatex)"
+        "-o",
+        "--output",
+        help="Path to the output PDF file (e.g., output.pdf)",
+        type=Path,
+        default=Path(os.getcwd()) / "output.pdf",
     )
 
     return parser.parse_args()
@@ -56,7 +51,7 @@ def run(input_md: Path, output_pdf: Path):
     cmd = [
         "pandoc",
         input_md,
-        "--from=markdown+tex_math_dollars+raw_tex",
+        "--from=gfm+tex_math_dollars+raw_tex",
         "--to=html5",
         "--standalone",
         "--katex=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/",
@@ -79,6 +74,7 @@ def run(input_md: Path, output_pdf: Path):
             output_pdf,
         )
     )
+
     if os.path.exists(tmp_file_path):
         os.remove(tmp_file_path)
 
@@ -97,7 +93,7 @@ def run(input_md: Path, output_pdf: Path):
 
 def main():
     parsed_args = parse_args()
-    run(parsed_args.input_md, parsed_args.output_pdf)
+    run(parsed_args.input_md, parsed_args.output)
 
 
 if __name__ == "__main__":
