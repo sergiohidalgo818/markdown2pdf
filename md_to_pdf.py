@@ -60,23 +60,22 @@ def run(input_md: Path, output_pdf: Path):
     cmd = [
         "pandoc",
         input_md,
-        "--from=gfm+tex_math_dollars+raw_tex",
+        "--from=gfm-smart+tex_math_dollars+raw_html",
         "--to=html5",
         "--standalone",
+        "--syntax-highlighting=pygments",
         "--katex=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/",
         f"--metadata=base_url=file://{input_md.parent.resolve()}/",
         f"--resource-path={input_md.parent.resolve()}",
         f"--css={css_file_path}",
-        "-V",
-        "geometry:margin=1in",
-        "-V",
-        "fontsize=11pt",
         "-o",
         tmp_file_path,
     ]
 
     print("Generating PDF...")
     result = subprocess.run(cmd, capture_output=True, text=True, cwd=input_md.parent)
+
+    # HTML(tmp_file_path).write_pdf(output_pdf)
     asyncio.get_event_loop().run_until_complete(
         html_to_pdf(
             tmp_file_path.resolve(),

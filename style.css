@@ -61,7 +61,6 @@ img {
   margin: 0.5em auto;
 }
 
-/* Captions below figures or images */
 figcaption, .figure caption, td > p:last-child {
   text-align: center;
   font-style: italic;
@@ -70,16 +69,16 @@ figcaption, .figure caption, td > p:last-child {
   color: #333;
 }
 
-/* ===== TABLES (used for image layouts) ===== */
+/* ===== TABLES ===== */
 table {
   border-collapse: separate;
   border-spacing: 0.6em 0;
   margin: 1.2em auto;
   width: 100%;
   border: none;
-  table-layout: fixed; /* ensures consistent column widths */
+  table-layout: fixed;
 }
-/* Make sure images fill each cell neatly */
+
 table img {
   display: block;
   margin: 0.2em auto;
@@ -87,45 +86,100 @@ table img {
   border-radius: 4px;
   padding: 0.15em;
   background-color: #fafafa;
-  width: 98%; /* fills cell nicely, leaving a tiny margin */
+  width: 98%;
   height: auto;
   box-sizing: border-box;
 }
+
 td, th {
   border: none;
   vertical-align: top;
   text-align: center;
   padding: 0.2em;
-  width: 52%; /* equal columns that fit exactly in 100% */
-}
-/* Captions under each figure */
-figcaption, .figure caption, td > p:last-child {
-  text-align: center;
-  font-style: italic;
-  font-size: 0.9em;
-  margin-top: 0.3em;
-  color: #333;
+  width: 52%;
 }
 
-/* ===== CODE BLOCKS ===== */
+/* ===== CODE BLOCKS – Wrapping fix for long commands ===== */
+pre, code {
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 0.9em;
+  line-height: 1.45;
+  font-variant-ligatures: none;
+}
+
 pre {
-  background-color: #f5f5f5;
+  background: #f7f7f7;
   border: 1px solid #ccc;
   border-radius: 6px;
-  padding: 0.75em 1em;
-  overflow-x: auto;
-  font-family: "Fira Code", "Courier New", monospace;
-  font-size: 0.85em;
-  line-height: 1.4;
+  padding: 0.8em 1em;
   margin: 1.2em 0;
+  overflow-x: visible;
+  white-space: pre-wrap;        /* allow wrapping */
+  word-break: break-word;       /* wrap only at safe boundaries */
+  overflow-wrap: break-word;    /* Chrome/Puppeteer-friendly */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+pre > code {
+  background: none;
+  border: none;
+  display: block;
+  white-space: pre-wrap;        /* wrap only at spaces */
+  word-break: break-word;
 }
 
 code {
-  background-color: #f0f0f0;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 0.15em 0.3em;
-  font-family: "Fira Code", "Courier New", monospace;
-  font-size: 0.9em;
+  padding: 0.15em 0.35em;
+}
+
+pre code span {
+  white-space: pre-wrap;        /* wrap at spaces */
+  word-break: break-word;       /* no mid-token splits */
+}
+
+/* ===== CONTINUOUS PAGE FLOW FIX FOR WEASYPRINT ===== */
+@page {
+  size: A4;
+  margin: 25mm 20mm 25mm 20mm;
+}
+
+body {
+  orphans: 3;
+  widows: 3;
+}
+
+h1, h2, h3, h4, figure, table, pre, code, p {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+section, div {
+  page-break-before: avoid;
+  break-before: avoid;
+  page-break-after: auto;
+  break-after: auto;
+}
+
+img {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+html, body {
+  line-height: 1.5;
+  background: white;
+}
+
+p, pre, figure {
+  margin-top: 0.5em;
+  margin-bottom: 0.8em;
+}
+
+@media print {
+  pre { overflow-x: visible; }
 }
 
 /* ===== LINKS ===== */
