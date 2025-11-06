@@ -75,7 +75,6 @@ figcaption, .figure caption, td > p:last-child {
 table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0.6em;
   table-layout: auto; /* let cells size dynamically */
 }
 
@@ -84,15 +83,11 @@ td, th {
   display: block;
   vertical-align: middle;
   text-align: center;
-  padding: 0.4em;
 }
 
 table img {
   display: block;
-  margin: 0.3em auto;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 0.25em;
   background-color: #fafafa;
   width: 98%;              /* nearly full cell width */
   max-width: none;         /* allow natural scaling */
