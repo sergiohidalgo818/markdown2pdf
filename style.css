@@ -71,30 +71,79 @@ figcaption, .figure caption, td > p:last-child {
 
 /* ===== TABLES ===== */
 
-/* Larger images inside tables */
+
+/* ===== ULTRA LARGE FIGURES – TWO PER ROW ===== */
 table {
   width: 100%;
   border-collapse: separate;
-  table-layout: auto; /* let cells size dynamically */
+  border-spacing: 20px 25px; /* less horizontal gap */
+  margin: 1.5em auto;
+  table-layout: auto; /* allows wider images */
 }
 
-td, th {
-  width: 90%;              /* each cell half the page width */
+/* Each figure cell */
+td {
+  vertical-align: top;
+  text-align: center;
+  padding: 0;
+}
+
+/* Images – truly large */
+table img {
   display: block;
-  vertical-align: middle;
+  margin: 0 auto 0.8em auto;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+  background-color: #fafafa;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  
+  width: 100%;         /* fill available cell width */
+  max-width: none;     /* ⚡️ disables scaling limit */
+  height: auto;
+}
+
+/* Make top row 2 per line, last row centered automatically */
+td {
+  width: 49%; /* fits 2 images per row neatly */
+}
+tr:has(td:only-child) td {
+  width: 100%; /* single figure centered full width */
   text-align: center;
 }
 
-table img {
+/* Captions */
+td em {
   display: block;
-  border: 1px solid #ccc;
-  background-color: #fafafa;
-  width: 98%;              /* nearly full cell width */
-  max-width: none;         /* allow natural scaling */
-  height: auto;
-  box-sizing: border-box;
+  font-style: italic;
+  color: #333;
+  font-size: 1.05em;
+  line-height: 1.5;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* Prevent splitting figures */
+table, tr, td, img, em {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Print-safe layout (Pandoc PDF / WeasyPrint) */
+@media print {
+  table {
+    border-spacing: 15px 20px;
+  }
+  td {
+    width: 49%;
+  }
+  table img {
+    width: 100%;
+    max-width: none;
+  }
+}
 
 /* ===== CODE BLOCKS – Wrapping fix for long commands ===== */
 pre, code {
