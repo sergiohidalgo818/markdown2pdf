@@ -70,34 +70,36 @@ figcaption, .figure caption, td > p:last-child {
 }
 
 /* ===== TABLES ===== */
+
+/* Larger images inside tables */
 table {
-  border-collapse: separate;
-  border-spacing: 0.6em 0;
-  margin: 1.2em auto;
   width: 100%;
-  border: none;
-  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0.6em;
+  table-layout: auto; /* let cells size dynamically */
+}
+
+td, th {
+  width: 90%;              /* each cell half the page width */
+  display: block;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0.4em;
 }
 
 table img {
   display: block;
-  margin: 0.2em auto;
+  margin: 0.3em auto;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 0.15em;
+  border-radius: 6px;
+  padding: 0.25em;
   background-color: #fafafa;
-  width: 98%;
+  width: 98%;              /* nearly full cell width */
+  max-width: none;         /* allow natural scaling */
   height: auto;
   box-sizing: border-box;
 }
 
-td, th {
-  border: none;
-  vertical-align: top;
-  text-align: center;
-  padding: 0.2em;
-  width: 52%;
-}
 
 /* ===== CODE BLOCKS – Wrapping fix for long commands ===== */
 pre, code {
